@@ -1,0 +1,82 @@
+////////////////////////////// Planejamento//////////////////////////
+
+Projetos de inspiração: 
+https://www.youtube.com/watch?v=DKYUrLgrwUw&ab_channel=LeoneSouza
+https://www.youtube.com/watch?v=u0J_oR6Miyc&ab_channel=IsraelIedodeAssun%C3%A7%C3%A3o
+https://www.youtube.com/watch?v=DUuXtDSWfYM&ab_channel=DanielProgTechProjects
+
+Bibliotecas:
+LiquidCrystal.h
+OneWire.h
+DallasTemperature.h
+
+Funções:
+
+getButtonPressed()
+getTankTemperature(Tank)
+setMenu(side)
+ 
+Lógica:
+
+Menu:
+
+Cursor: Número de qual opção do menu foi selecionada
+
+Abas:
+    Nova brassagem - 
+    Iniciar Brassagem
+
+Configuração: Configurar os setPoints, rampas, tempos de lúpulo, etc.
+Aba no Menu -> Nova Brassagem
+Menu pede uma configuração por vez
+Usuário seta as configurações através das setas 
+Na ultima configuração, volta ao menu
+
+Parâmetros a serem configurados:
+
+Temperatura inicial do tanque 1
+Quantidade de rampas
+Temperatura da rampa n - Loop dependendo da quantidade de rampas
+Tempo da rampa n - Loop dependendo da quantidade de rampas
+Tempo de clarificação****
+Tempo de fervura
+Quantidade de lúpulos 
+Tempo do lúpulo - Loop dependendo da quantidade de lúpulos
+
+Processos: 
+Aba menu -> Iniciar Brassagem
+
+Processo de brassagem (mosturação):
+    Regula a temperatura do tanque 1 (Liga a resistência 1 e o motor 1)
+    Se a temperatura estiver no SetPoint configurado, Avisa no display a adição do malte
+
+    Inicia o crônometro da rampa 1 (millis())
+    Mantem a temperatura no setpoint (Liga/desliga a resistência)
+   Crônometro chega no temp configurado, Avisa no display a transferência do malte e o acionamento de válvulas (Liga a bomba)
+    Espera até que todo o mosto seja liberado (delay)
+   Desliga a resistência 1 e o motor 1
+
+Processo de clarificação:
+
+Liga o motor 2
+
+2 formas:
+
+    Usuário configura um tempo determinado:
+         Espera até o tempo configurado (delay)   
+
+    Usuário analisa a cor do malte:
+        Espera até que o usuário pressione o botão ENTER (loop)          
+
+     Avisa no display a transferência do malte e o acionamento de válvulas (Liga a bomba)
+     Espera até que todo o mosto seja liberado (delay)
+     Desliga o motor 1 e a bomba
+
+Processo de Fervura
+
+        Inicia o crônometro de fervura (millis())
+        Mantem a temperatura no setpoint (Liga/desliga a resistência)
+        Se o cronômetro for igual ao tempo de um lúpúlo, Avisa no display para a adicição do lúpulo
+        Se o crônometro de fervura for igual ao tempo de fervura, avisa no display a transferência do malte e o acionamento de válvulas (Liga a bomba e desliga a resistência)
+        espera até que todo o mosto seja liberado (delay)
+        Desliga a bomba
